@@ -16,7 +16,7 @@
 import sys
 import threading
 
-from System.Threading import Thread, ThreadStart
+from System.Threading import Thread, ThreadStart # type: ignore[import]
 
 
 class Timeout(object):

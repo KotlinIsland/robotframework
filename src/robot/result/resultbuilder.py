@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 from robot.errors import DataError
 from robot.model import SuiteVisitor
 from robot.utils import ET, ETSource, get_error_message, unic
@@ -23,8 +23,18 @@ from .flattenkeywordmatcher import (FlattenByNameMatcher, FlattenByTypeMatcher,
 from .merger import Merger
 from .xmlelementhandlers import XmlElementHandler
 
+from typing import TYPE_CHECKING
 
-def ExecutionResult(*sources, **options):
+if TYPE_CHECKING:
+    from pathlib import Path
+    from typing import TextIO, overload, Literal
+
+
+    @overload  # type: ignore[misc]
+    def ExecutionResult(*sources: str | TextIO | bytes | Path, merge: bool = ..., rpa: Literal[True] = ...) -> Result: ...
+
+
+def ExecutionResult(*sources: str | TextIO | bytes | Path, **options: object) -> Result:
     """Factory method to constructs :class:`~.executionresult.Result` objects.
 
     :param sources: XML source(s) containing execution results.

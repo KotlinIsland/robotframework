@@ -66,6 +66,13 @@ internally by Robot Framework itself. Some good examples are
 :class:`~robot.model.tagsetter.TagSetter` and
 :mod:`keyword removers <robot.result.keywordremover>`.
 """
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Literal
+    from robot.model import TestSuite, TestCase
 
 
 class SuiteVisitor(object):
@@ -75,7 +82,7 @@ class SuiteVisitor(object):
     information and an example.
     """
 
-    def visit_suite(self, suite):
+    def visit_suite(self, suite: TestSuite) -> None:
         """Implements traversing through suites.
 
         Can be overridden to allow modifying the passed in ``suite`` without
@@ -89,18 +96,18 @@ class SuiteVisitor(object):
             suite.teardown.visit(self)
             self.end_suite(suite)
 
-    def start_suite(self, suite):
+    def start_suite(self, suite: TestSuite) -> None | Literal[False]:
         """Called when suite starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_suite(self, suite):
+    def end_suite(self, suite: TestSuite) -> None:
         """Called when suite ends. Default implementation does nothing."""
         pass
 
-    def visit_test(self, test):
+    def visit_test(self, test: TestCase) -> None:
         """Implements traversing through tests.
 
         Can be overridden to allow modifying the passed in ``test`` without
@@ -112,18 +119,18 @@ class SuiteVisitor(object):
             test.teardown.visit(self)
             self.end_test(test)
 
-    def start_test(self, test):
+    def start_test(self, test: TestCase) -> None | Literal[False]:
         """Called when test starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_test(self, test):
+    def end_test(self, test) -> None:
         """Called when test ends. Default implementation does nothing."""
         pass
 
-    def visit_keyword(self, kw):
+    def visit_keyword(self, kw) -> None:
         """Implements traversing through keywords.
 
         Can be overridden to allow modifying the passed in ``kw`` without
@@ -136,18 +143,18 @@ class SuiteVisitor(object):
             kw.teardown.visit(self)
             self.end_keyword(kw)
 
-    def start_keyword(self, keyword):
+    def start_keyword(self, keyword) -> None | Literal[False]:
         """Called when keyword starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_keyword(self, keyword):
+    def end_keyword(self, keyword) -> None:
         """Called when keyword ends. Default implementation does nothing."""
         pass
 
-    def visit_for(self, for_):
+    def visit_for(self, for_) -> None:
         """Implements traversing through FOR loops.
 
         Can be overridden to allow modifying the passed in ``for_`` without
@@ -157,18 +164,18 @@ class SuiteVisitor(object):
             for_.body.visit(self)
             self.end_for(for_)
 
-    def start_for(self, for_):
+    def start_for(self, for_) -> None | Literal[False]:
         """Called when FOR loop starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_for(self, for_):
+    def end_for(self, for_) -> None:
         """Called when FOR loop ends. Default implementation does nothing."""
         pass
 
-    def visit_for_iteration(self, iteration):
+    def visit_for_iteration(self, iteration) -> None:
         """Implements traversing through single FOR loop iteration.
 
         This is only used with the result side model because on the running side
@@ -182,14 +189,14 @@ class SuiteVisitor(object):
             iteration.body.visit(self)
             self.end_for_iteration(iteration)
 
-    def start_for_iteration(self, iteration):
+    def start_for_iteration(self, iteration) -> None | Literal[False]:
         """Called when FOR loop iteration starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_for_iteration(self, iteration):
+    def end_for_iteration(self, iteration) -> None:
         """Called when FOR loop iteration ends. Default implementation does nothing."""
         pass
 
@@ -206,18 +213,18 @@ class SuiteVisitor(object):
             if_.body.visit(self)
             self.end_if(if_)
 
-    def start_if(self, if_):
+    def start_if(self, if_) -> None | Literal[False]:
         """Called when IF/ELSE structure starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_if(self, if_):
+    def end_if(self, if_) -> None:
         """Called when IF/ELSE structure ends. Default implementation does nothing."""
         pass
 
-    def visit_if_branch(self, branch):
+    def visit_if_branch(self, branch) -> None:
         """Implements traversing through single IF/ELSE branch.
 
         Can be overridden to allow modifying the passed in ``branch`` without
@@ -227,18 +234,18 @@ class SuiteVisitor(object):
             branch.body.visit(self)
             self.end_if_branch(branch)
 
-    def start_if_branch(self, branch):
+    def start_if_branch(self, branch) -> None | Literal[False]:
         """Called when IF/ELSE branch starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_if_branch(self, branch):
+    def end_if_branch(self, branch) -> None:
         """Called when IF/ELSE branch ends. Default implementation does nothing."""
         pass
 
-    def visit_message(self, msg):
+    def visit_message(self, msg: str) -> None:
         """Implements visiting messages.
 
         Can be overridden to allow modifying the passed in ``msg`` without
@@ -247,13 +254,13 @@ class SuiteVisitor(object):
         if self.start_message(msg) is not False:
             self.end_message(msg)
 
-    def start_message(self, msg):
+    def start_message(self, msg: str) -> None | Literal[False]:
         """Called when message starts. Default implementation does nothing.
 
         Can return explicit ``False`` to stop visiting.
         """
         pass
 
-    def end_message(self, msg):
+    def end_message(self, msg: str) -> None:
         """Called when message ends. Default implementation does nothing."""
         pass

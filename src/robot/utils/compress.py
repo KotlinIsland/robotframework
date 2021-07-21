@@ -36,8 +36,8 @@ else:
     # (http://bugs.jython.org/issue1775). Kept around still because it is a bit
     # faster than Jython's standard zlib.compress.
 
-    from java.util.zip import Deflater
-    import jarray
+    from java.util.zip import Deflater # type: ignore[import]
+    import jarray # type: ignore[import]
 
     _DEFLATOR = Deflater(9, False)
 

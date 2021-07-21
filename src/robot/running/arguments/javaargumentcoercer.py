@@ -13,7 +13,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from java.lang import Byte, Short, Integer, Long, Boolean, Float, Double
+from java.lang import Byte, Short, Integer, Long, Boolean, Float, Double # type: ignore[import]
 
 from robot.variables import contains_variable
 from robot.utils import is_string, is_list_like
@@ -68,8 +68,8 @@ class CoercerFinder(object):
 
 class _Coercer(object):
     _name = ''
-    _types = []
-    _primitives = []
+    _types: list[type[type]] = []
+    _primitives: list[str] = []
 
     def __init__(self, position=None):
         self._position = position

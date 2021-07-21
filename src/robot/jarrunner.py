@@ -16,7 +16,7 @@
 import os
 import sys
 
-from org.robotframework import RobotPythonRunner
+from org.robotframework import RobotPythonRunner  # type: ignore[import]
 
 from robot.errors import INFO_PRINTED
 from robot.libdoc import libdoc_cli

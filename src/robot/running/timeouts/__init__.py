@@ -22,11 +22,11 @@ from robot.errors import TimeoutError, DataError, FrameworkError
 if JYTHON:
     from .jython import Timeout
 elif IRONPYTHON:
-    from .ironpython import Timeout
+    from .ironpython import Timeout  # type: ignore[misc]
 elif WINDOWS:
-    from .windows import Timeout
+    from .windows import Timeout  # type: ignore[misc]
 else:
-    from .posix import Timeout
+    from .posix import Timeout  # type: ignore[misc]
 
 
 @py3to2

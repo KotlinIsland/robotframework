@@ -12,6 +12,9 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
+
+import typing
 
 from robot.utils import py3to2, setter
 
@@ -25,6 +28,8 @@ from .modelobject import ModelObject
 from .tagsetter import TagSetter
 from .testcase import TestCase, TestCases
 
+if typing.TYPE_CHECKING:
+    from robot.result.model import Keyword as ModelKeyword
 
 @py3to2
 class TestSuite(ModelObject):
@@ -34,7 +39,7 @@ class TestSuite(ModelObject):
     :class:`robot.result.model.TestSuite`.
     """
     test_class = TestCase    #: Internal usage only.
-    fixture_class = Keyword  #: Internal usage only.
+    fixture_class: type[Keyword | ModelKeyword] = Keyword  #: Internal usage only.
     repr_args = ('name',)
     __slots__ = ['parent', 'source', '_name', 'doc', '_my_visitors', 'rpa']
 
@@ -230,7 +235,7 @@ class TestSuite(ModelObject):
 
 
 class TestSuites(ItemList):
-    __slots__ = []
+    __slots__: list[str] = []
 
     def __init__(self, suite_class=TestSuite, parent=None, suites=None):
         ItemList.__init__(self, suite_class, {'parent': parent}, suites)

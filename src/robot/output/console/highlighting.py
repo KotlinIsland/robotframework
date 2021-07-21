@@ -24,7 +24,7 @@ import sys
 try:
     from ctypes import windll, Structure, c_short, c_ushort, byref
 except ImportError:  # Not on Windows or using Jython
-    windll = None
+    windll = None  # type: ignore[assignment]
 
 from robot.errors import DataError
 from robot.utils import console_encode, isatty, WINDOWS
@@ -64,7 +64,7 @@ class HighlightingStream(object):
                 raise
             self._write(text, retry-1)
 
-    @property
+    @property  # type: ignore[misc]
     @contextmanager
     def _suppress_broken_pipe_error(self):
         try:

@@ -43,7 +43,7 @@ from robot.variables import (evaluate_expression, is_dict_variable,
 from robot.version import get_version
 
 if JYTHON:
-    from java.lang import String, Number
+    from java.lang import String, Number # type: ignore[import]
 
 
 # TODO: Clean-up registering run keyword variants in RF 3.1.

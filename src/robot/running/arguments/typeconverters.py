@@ -12,24 +12,26 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
 
+import typing
 from ast import literal_eval
 from collections import OrderedDict
 try:
     from collections import abc
 except ImportError:    # Python 2
-    import collections as abc
+    import collections as abc  # type: ignore[no-redef]
 try:
     from typing import Union
 except ImportError:
-    class Union(object):
+    class Union(object):  # type: ignore[no-redef]
         pass
 from datetime import datetime, date, timedelta
 from decimal import InvalidOperation, Decimal
 try:
     from enum import Enum
 except ImportError:    # Standard in Py 3.4+ but can be separately installed
-    class Enum(object):
+    class Enum(object):  # type: ignore[no-redef]
         pass
 from numbers import Integral, Real
 
@@ -38,15 +40,18 @@ from robot.utils import (FALSE_STRINGS, IRONPYTHON, TRUE_STRINGS, PY2,
                          eq, get_error_message, is_string, seq2str, type_name,
                          unic, unicode)
 
+if typing.TYPE_CHECKING:
+    from builtins import type as builtin_type
+
 
 class TypeConverter(object):
-    type = None
-    type_name = None
-    abc = None
-    aliases = ()
-    value_types = (unicode,)
-    _converters = OrderedDict()
-    _type_aliases = {}
+    type: type | None = None
+    type_name: str | None = None
+    abc: builtin_type | None = None
+    aliases: tuple[str, ...] = ()
+    value_types: tuple[builtin_type, ...] = (unicode,)
+    _converters: dict[object, object] = OrderedDict()
+    _type_aliases: dict[object, object] = {}
 
     def __init__(self, used_type):
         self.used_type = used_type
@@ -477,7 +482,7 @@ class FrozenSetConverter(TypeConverter):
 
 @TypeConverter.register
 class CombinedConverter(TypeConverter):
-    type = Union
+    type = Union  # type: ignore[assignment]
 
     def __init__(self, union):
         self.types = self._none_to_nonetype(self._get_types(union))

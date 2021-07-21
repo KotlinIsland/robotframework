@@ -15,7 +15,7 @@
 
 import sys
 
-from java.lang import Thread, Runnable
+from java.lang import Thread, Runnable # type: ignore[import]
 
 
 class Timeout(object):

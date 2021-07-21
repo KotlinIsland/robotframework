@@ -12,18 +12,18 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
+import wpf  # type: ignore[import] # Loads required .NET Assemblies behind the scenes
 
-import wpf    # Loads required .NET Assemblies behind the scenes
-
-from System.Windows import (GridLength, SizeToContent, TextWrapping, Thickness,
+from System.Windows import (GridLength, SizeToContent, TextWrapping, Thickness,  # type: ignore[import]
                             Window, WindowStartupLocation)
-from System.Windows.Controls import (Button, ColumnDefinition, Grid, Label, ListBox,
+from System.Windows.Controls import (Button, ColumnDefinition, Grid, Label, ListBox,  # type: ignore[import]
                                      PasswordBox, RowDefinition, TextBlock, TextBox, SelectionMode)
 
 
 class _WpfDialog(Window):
     _left_button = 'OK'
-    _right_button = 'Cancel'
+    _right_button: str | None = 'Cancel'
 
     def __init__(self, message, value=None, **extra):
         self._initialize_dialog()

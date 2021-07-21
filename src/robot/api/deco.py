@@ -13,10 +13,21 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+from __future__ import annotations
+
 import inspect
 
+from typing import TYPE_CHECKING, overload, cast, Any
 
-def not_keyword(func):
+if TYPE_CHECKING:
+    try:
+        from typing import Callable, Literal, TypeVar
+    except ImportError:
+        from typing_extensions import Literal # type: ignore[misc]
+    Fn = TypeVar("Fn", bound=Callable[..., Any])
+    Cls = TypeVar("Cls", bound=type)
+
+def not_keyword(func: Fn) -> Fn:
     """Decorator to disable exposing functions or methods as keywords.
 
     Examples::
@@ -34,15 +45,20 @@ def not_keyword(func):
 
     New in Robot Framework 3.2.
     """
-    func.robot_not_keyword = True
+    func.robot_not_keyword = True# type: ignore[attr-defined]
     return func
 
 
-not_keyword.robot_not_keyword = True
+not_keyword.robot_not_keyword = True # type: ignore[attr-defined]
 
+@overload
+def keyword(name: Fn) -> Fn: ...
+
+@overload
+def keyword(name: str = None, tags: list[str] = ..., types: dict[str, type] | list[type] | None = ...) -> Callable[[Fn], Fn]: ...
 
 @not_keyword
-def keyword(name=None, tags=(), types=()):
+def keyword(name: Fn | str | None = None, tags: list[str] | tuple[None, ...] = (), types: dict[str, type] | list[type] | tuple[None, ...] | None =()) -> Callable[[Fn], Fn] | Fn:
     """Decorator to set custom name, tags and argument types to keywords.
 
     This decorator creates ``robot_name``, ``robot_tags`` and ``robot_types``
@@ -85,20 +101,26 @@ def keyword(name=None, tags=(), types=()):
             # ...
     """
     if inspect.isroutine(name):
-        return keyword()(name)
+        return keyword()(cast(Callable, name))
 
-    def decorator(func):
-        func.robot_name = name
-        func.robot_tags = tags
-        func.robot_types = types
+    def decorator(func: Fn) -> Fn:
+        func.robot_name = name# type:ignore[attr-defined]
+        func.robot_tags = tags# type:ignore[attr-defined]
+        func.robot_types = types# type:ignore[attr-defined]
         return func
 
     return decorator
 
+@overload
+def library(scope: Cls) -> Cls: ...
+
+@overload
+def library(scope: Literal["GLOBAL", "SUITE", "TEST", None] = None, version: str =None, doc_format: str  =None, listener: str=None,
+            auto_keywords: bool=False) -> Callable[[Cls], Cls]: ...
 
 @not_keyword
-def library(scope=None, version=None, doc_format=None, listener=None,
-            auto_keywords=False):
+def library(scope: Literal["GLOBAL", "SUITE", "TEST", None] | Cls = None, version: str =None, doc_format: str  =None, listener: str=None,
+            auto_keywords: bool=False) -> Cls | Callable[[Cls], Cls]:
     """Class decorator to control keyword discovery and other library settings.
 
     By default disables automatic keyword detection by setting class attribute
@@ -134,18 +156,18 @@ def library(scope=None, version=None, doc_format=None, listener=None,
     The ``@library`` decorator is new in Robot Framework 3.2.
     """
     if inspect.isclass(scope):
-        return library()(scope)
+        return library()(cast(type, scope))
 
-    def decorator(cls):
+    def decorator(cls: Cls) -> Cls:
         if scope is not None:
-            cls.ROBOT_LIBRARY_SCOPE = scope
+            cls.ROBOT_LIBRARY_SCOPE = scope # type:ignore[attr-defined]
         if version is not None:
-            cls.ROBOT_LIBRARY_VERSION = version
+            cls.ROBOT_LIBRARY_VERSION = version# type:ignore[attr-defined]
         if doc_format is not None:
-            cls.ROBOT_LIBRARY_DOC_FORMAT = doc_format
+            cls.ROBOT_LIBRARY_DOC_FORMAT = doc_format# type:ignore[attr-defined]
         if listener is not None:
-            cls.ROBOT_LIBRARY_LISTENER = listener
-        cls.ROBOT_AUTO_KEYWORDS = auto_keywords
+            cls.ROBOT_LIBRARY_LISTENER = listener# type:ignore[attr-defined]
+        cls.ROBOT_AUTO_KEYWORDS = auto_keywords# type:ignore[attr-defined]
         return cls
 
     return decorator

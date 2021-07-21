@@ -35,17 +35,17 @@ if not IRONPYTHON_WITH_BROKEN_ETREE:
         from xml.etree import cElementTree as ET
     except ImportError:
         try:
-            from xml.etree import ElementTree as ET
+            from xml.etree import ElementTree as ET  # type: ignore[no-redef]
         except ImportError:
             raise ImportError(NO_ETREE_ERROR)
 else:
     # Standard ElementTree works only with IronPython 2.7.9+
     # https://github.com/IronLanguages/ironpython2/issues/370
     try:
-        from elementtree import ElementTree as ET
+        from elementtree import ElementTree as ET  # type: ignore[import,no-redef]
     except ImportError:
         raise ImportError(NO_ETREE_ERROR)
-    from StringIO import StringIO
+    from StringIO import StringIO # type: ignore[import]
 
 
 # cElementTree.VERSION seems to always be 1.0.6. We want real API version.

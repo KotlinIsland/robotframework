@@ -25,9 +25,9 @@ if JYTHON:
     if JAVA_VERSION < (1, 9):
         from .javabuilder import JavaDocBuilder
     else:
-        from .java9builder import JavaDocBuilder
+        from .java9builder import JavaDocBuilder  # type: ignore[misc]
 else:
-    def JavaDocBuilder():
+    def JavaDocBuilder():  # type: ignore[no-redef]
         raise DataError('Documenting Java test libraries requires Jython.')
 
 

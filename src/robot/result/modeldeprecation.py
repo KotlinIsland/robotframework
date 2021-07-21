@@ -24,44 +24,44 @@ def deprecated(method):
 
 
 class DeprecatedAttributesMixin(object):
-    __slots__ = []
+    __slots__: list[str] = []
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def name(self):
         return ''
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def kwname(self):
         return self.name
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def libname(self):
         return None
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def args(self):
         return ()
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def assign(self):
         return ()
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def tags(self):
         return Tags()
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def timeout(self):
         return None
 
-    @property
+    @property  # type: ignore[misc]
     @deprecated
     def message(self):
         return ''

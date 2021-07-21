@@ -12,6 +12,9 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
+
+import typing
 
 from robot.utils import py3to2, setter
 
@@ -22,7 +25,8 @@ from .keyword import Keyword, Keywords
 from .modelobject import ModelObject
 from .tags import Tags
 
-
+if typing.TYPE_CHECKING:
+    from robot.result.model import Keyword as ModelKeyword
 @py3to2
 class TestCase(ModelObject):
     """Base model for a single test case.
@@ -31,7 +35,7 @@ class TestCase(ModelObject):
     :class:`robot.result.model.TestCase`.
     """
     body_class = Body
-    fixture_class = Keyword
+    fixture_class: type[Keyword | ModelKeyword] = Keyword
     repr_args = ('name',)
     __slots__ = ['parent', 'name', 'doc', 'timeout']
 
@@ -134,7 +138,7 @@ class TestCase(ModelObject):
 
 
 class TestCases(ItemList):
-    __slots__ = []
+    __slots__: list[str] = []
 
     def __init__(self, test_class=TestCase, parent=None, tests=None):
         ItemList.__init__(self, test_class, {'parent': parent}, tests)

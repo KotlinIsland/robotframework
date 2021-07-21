@@ -12,15 +12,22 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
+
+import typing
 
 from .sections import (InitFileSections, TestCaseFileSections,
                        ResourceFileSections)
 from .settings import (InitFileSettings, TestCaseFileSettings,
                        ResourceFileSettings, TestCaseSettings, KeywordSettings)
 
+if typing.TYPE_CHECKING:
+    from robot.parsing.lexer.sections import Sections
+    from .settings import Settings
+
 
 class LexingContext(object):
-    settings_class = None
+    settings_class: type[Settings] | None = None
 
     def __init__(self, settings=None):
         self.settings = settings or self.settings_class()
@@ -30,7 +37,7 @@ class LexingContext(object):
 
 
 class FileContext(LexingContext):
-    sections_class = None
+    sections_class: type[Sections] | None = None
 
     def __init__(self, settings=None):
         LexingContext.__init__(self, settings)

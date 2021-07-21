@@ -23,4 +23,4 @@ from .embedded import EmbeddedArguments
 if JYTHON:
     from .javaargumentcoercer import JavaArgumentCoercer
 else:
-    JavaArgumentCoercer = None
+    JavaArgumentCoercer = None  # type: ignore[assignment,misc]

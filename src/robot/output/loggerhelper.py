@@ -12,11 +12,16 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
+
+import typing
 
 from robot.errors import DataError
 from robot.model import Message as BaseMessage
 from robot.utils import get_timestamp, is_unicode, unic
 
+if typing.TYPE_CHECKING:
+    from typing import Callable
 
 LEVELS = {
   'NONE'  : 7,
@@ -136,8 +141,8 @@ class IsLogged(object):
 
 
 class AbstractLoggerProxy(object):
-    _methods = None
-    _no_method = lambda *args: None
+    _methods: tuple[str, ...] | None = None
+    _no_method: Callable[..., object] | None = lambda *args: None
 
     def __init__(self, logger, method_names=None, prefix=None):
         self.logger = logger

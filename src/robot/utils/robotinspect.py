@@ -20,7 +20,7 @@ from .platform import JYTHON, PY2, PYPY
 
 if JYTHON:
 
-    from org.python.core import PyReflectedFunction, PyReflectedConstructor
+    from org.python.core import PyReflectedFunction, PyReflectedConstructor # type: ignore[import]
 
     def is_java_init(init):
         return isinstance(init, PyReflectedConstructor)

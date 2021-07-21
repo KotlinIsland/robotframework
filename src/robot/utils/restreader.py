@@ -17,8 +17,8 @@ from robot.errors import DataError
 
 try:
     from docutils.core import publish_doctree
-    from docutils.parsers.rst.directives import register_directive
-    from docutils.parsers.rst.directives.body import CodeBlock
+    from docutils.parsers.rst.directives import register_directive  # type: ignore[import]
+    from docutils.parsers.rst.directives.body import CodeBlock  # type: ignore[import]
 except ImportError:
     raise DataError("Using reStructuredText test data requires having "
                     "'docutils' module version 0.9 or newer installed.")

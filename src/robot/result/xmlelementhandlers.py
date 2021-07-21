@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 from robot.errors import DataError
 
 
@@ -33,9 +33,9 @@ class XmlElementHandler(object):
 
 
 class ElementHandler(object):
-    element_handlers = {}
-    tag = None
-    children = frozenset()
+    element_handlers: dict[object, object] = {}
+    tag: str | None = None
+    children: frozenset[object] = frozenset()
 
     @classmethod
     def register(cls, handler):

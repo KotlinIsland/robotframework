@@ -12,6 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
 
 from itertools import chain
 
@@ -24,7 +25,14 @@ from .tokenizer import Tokenizer
 from .tokens import EOS, Token
 
 
-def get_tokens(source, data_only=False, tokenize_variables=False):
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pathlib import Path
+    from typing import Generator
+
+
+def get_tokens(source: str | Path, data_only: bool=False, tokenize_variables: bool=False) -> Generator[Token, None, None]:
     """Parses the given source to tokens.
 
     :param source: The source where to read the data. Can be a path to
@@ -47,7 +55,7 @@ def get_tokens(source, data_only=False, tokenize_variables=False):
     return lexer.get_tokens()
 
 
-def get_resource_tokens(source, data_only=False, tokenize_variables=False):
+def get_resource_tokens(source: str | Path, data_only: bool=False, tokenize_variables: bool=False) -> Generator[Token, None, None]:
     """Parses the given source to resource file tokens.
 
     Otherwise same as :func:`get_tokens` but the source is considered to be
@@ -58,7 +66,7 @@ def get_resource_tokens(source, data_only=False, tokenize_variables=False):
     return lexer.get_tokens()
 
 
-def get_init_tokens(source, data_only=False, tokenize_variables=False):
+def get_init_tokens(source: str | Path, data_only=False, tokenize_variables=False) -> Generator[Token, None, None]:
     """Parses the given source to init file tokens.
 
     Otherwise same as :func:`get_tokens` but the source is considered to be

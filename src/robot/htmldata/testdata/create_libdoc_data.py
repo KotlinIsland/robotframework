@@ -18,6 +18,6 @@ from robot.libdocpkg.htmlwriter import LibdocModelWriter
 
 with open(OUTPUT, 'w') as output:
     libdoc = LibraryDocumentation(INPUT)
-    LibdocModelWriter(output, libdoc).write_data()
+    LibdocModelWriter(output, libdoc).write_data()  # type: ignore[attr-defined]
 
 print(OUTPUT)

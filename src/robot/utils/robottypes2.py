@@ -12,23 +12,23 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
-from collections import Iterable, Mapping, MutableMapping, Sequence
-from UserDict import UserDict
-from UserString import UserString
-from types import ClassType, NoneType
+from __future__ import annotations
+from collections import Iterable, Mapping, MutableMapping, Sequence  # type: ignore[attr-defined]
+from UserDict import UserDict  # type: ignore[import]  # type: ignore[attr-defined]
+from UserString import UserString  # type: ignore[import]  # type: ignore[attr-defined]
+from types import ClassType, NoneType  # type: ignore[attr-defined]
 
 try:
-    from java.lang import String
+    from java.lang import String # type: ignore[import]
 except ImportError:
     String = ()
 
 try:
     from typing_extensions import TypedDict
 except ImportError:
-    typeddict_types = ()
+    typeddict_types: tuple[type, ...] = ()
 else:
-    typeddict_types = (type(TypedDict('Dummy')),)
+    typeddict_types = (type(TypedDict('Dummy')),)  # type: ignore[operator]
 
 from .platform import RERAISED_EXCEPTIONS
 

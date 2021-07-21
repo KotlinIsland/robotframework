@@ -16,4 +16,4 @@
 try:
     from .jartemplate import HtmlTemplate
 except ImportError:
-    from .normaltemplate import HtmlTemplate
+    from .normaltemplate import HtmlTemplate  # type: ignore[misc]

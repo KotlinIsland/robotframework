@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 from os.path import basename, splitext
 
 from robot.htmldata import HtmlFileWriter, ModelWriter, LOG, REPORT
@@ -22,7 +22,7 @@ from .jswriter import JsResultWriter, SplitLogWriter
 
 
 class _LogReportWriter(object):
-    usage = None
+    usage: str | None = None
 
     def __init__(self, js_model):
         self._js_model = js_model

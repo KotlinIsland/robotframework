@@ -64,7 +64,7 @@ class Message(BodyItem):
 
 
 class Messages(ItemList):
-    __slots__ = []
+    __slots__: list[str] = []
 
     def __init__(self, message_class=Message, parent=None, messages=None):
         ItemList.__init__(self, message_class, {'parent': parent}, messages)

@@ -137,14 +137,14 @@ class Token(object):
 
     __slots__ = ['type', 'value', 'lineno', 'col_offset', 'error']
 
-    def __init__(self, type=None, value=None, lineno=-1, col_offset=-1, error=None):
+    def __init__(self, type: str=None, value: str=None, lineno: int=-1, col_offset: int=-1, error: object=None) -> None:
         self.type = type
         if value is None:
             value = {
                 Token.IF: 'IF', Token.ELSE_IF: 'ELSE IF', Token.ELSE: 'ELSE',
                 Token.FOR: 'FOR', Token.END: 'END', Token.CONTINUATION: '...',
                 Token.EOL: '\n', Token.WITH_NAME: 'WITH NAME'
-            }.get(type, '')
+            }.get(type, '')  # type: ignore[arg-type]
         self.value = value
         self.lineno = lineno
         self.col_offset = col_offset
@@ -215,7 +215,7 @@ class Token(object):
 
 class EOS(Token):
     """Token representing end of a statement."""
-    __slots__ = []
+    __slots__: list[str] = []
 
     def __init__(self, lineno=-1, col_offset=-1):
         Token.__init__(self, Token.EOS, '', lineno, col_offset)

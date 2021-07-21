@@ -16,10 +16,10 @@
 import os
 from posixpath import normpath, join
 from contextlib import contextmanager
-from java.io import BufferedReader, InputStreamReader
+from java.io import BufferedReader, InputStreamReader # type: ignore[import]
 
 # Works only when running from jar
-from org.robotframework.RobotRunner import getResourceAsStream
+from org.robotframework.RobotRunner import getResourceAsStream # type: ignore[import]
 
 
 class HtmlTemplate(object):
@@ -35,7 +35,7 @@ class HtmlTemplate(object):
                 yield line.rstrip()
                 line = reader.readLine()
 
-    @property
+    @property  # type: ignore[misc]
     @contextmanager
     def _reader(self):
         stream = getResourceAsStream(self._path)

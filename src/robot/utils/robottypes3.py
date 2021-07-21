@@ -22,13 +22,13 @@ try:
 except ImportError:
     typeddict_types = ()
 else:
-    typeddict_types = (type(TypedDict('Dummy')),)
+    typeddict_types = (type(TypedDict('Dummy')),)  # type: ignore[assignment,operator]
 try:
     from typing_extensions import TypedDict as ExtTypedDict
 except ImportError:
     pass
 else:
-    typeddict_types += (type(ExtTypedDict('Dummy')),)
+    typeddict_types += (type(ExtTypedDict('Dummy')),)  # type: ignore[assignment,operator]
 
 from .platform import RERAISED_EXCEPTIONS, PY_VERSION
 
@@ -36,7 +36,7 @@ if PY_VERSION < (3, 6):
     from pathlib import PosixPath, WindowsPath
     PathLike = (PosixPath, WindowsPath)
 else:
-    from os import PathLike
+    from os import PathLike  # type: ignore[misc]
 
 
 def is_integer(item):

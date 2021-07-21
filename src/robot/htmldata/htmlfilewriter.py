@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 import os.path
 import re
 
@@ -46,7 +46,7 @@ class HtmlFileWriter(object):
 
 
 class _Writer(object):
-    _handles_line = None
+    _handles_line: str | None = None
 
     def handles(self, line):
         return line.startswith(self._handles_line)

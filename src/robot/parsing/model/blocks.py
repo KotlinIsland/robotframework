@@ -12,18 +12,22 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 import ast
+import typing
 
 from robot.utils import file_writer, is_pathlike, is_string
 
 from .visitor import ModelVisitor
 from ..lexer import Token
 
+if typing.TYPE_CHECKING:
+    from typing import ClassVar
+
 
 class Block(ast.AST):
-    _fields = ()
-    _attributes = ('lineno', 'col_offset', 'end_lineno', 'end_col_offset', 'errors')
+    _fields: ClassVar[tuple[str, ...]] = ()
+    _attributes: ClassVar[tuple[str, ...]] = ('lineno', 'col_offset', 'end_lineno', 'end_col_offset', 'errors')
     errors = ()
 
     @property

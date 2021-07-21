@@ -34,7 +34,7 @@ from .outputcapture import OutputCapturer
 
 
 if JYTHON:
-    from java.lang import Object
+    from java.lang import Object # type: ignore[import]
 else:
     Object = None
 

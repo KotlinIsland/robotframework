@@ -112,9 +112,9 @@ def ClassDoc(path):
     http://docs.oracle.com/javase/7/docs/jdk/api/javadoc/doclet/
     """
     try:
-        from com.sun.tools.javadoc import JavadocTool, Messager, ModifierFilter
-        from com.sun.tools.javac.util import List, Context
-        from com.sun.tools.javac.code.Flags import PUBLIC
+        from com.sun.tools.javadoc import JavadocTool, Messager, ModifierFilter # type: ignore[import]
+        from com.sun.tools.javac.util import List, Context # type: ignore[import]
+        from com.sun.tools.javac.code.Flags import PUBLIC # type: ignore[import]
     except ImportError:
         raise DataError("Creating documentation from Java source files "
                         "requires 'tools.jar' to be in CLASSPATH.")

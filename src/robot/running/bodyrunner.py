@@ -66,7 +66,7 @@ class KeywordRunner(object):
 
 
 class IfRunner(object):
-    _dry_run_stack = []
+    _dry_run_stack: list[str] = []
 
     def __init__(self, context, run=True, templated=False):
         self._context = context

@@ -19,9 +19,9 @@ from robot.utils import py3to2, SetterAwareType, with_metaclass
 
 
 @py3to2
-class ModelObject(with_metaclass(SetterAwareType, object)):
-    repr_args = ()
-    __slots__ = []
+class ModelObject(with_metaclass(SetterAwareType, object)):  # type: ignore[misc]
+    repr_args: tuple[str, ...] = ()
+    __slots__: list[str] = []
 
     def config(self, **attributes):
         """Configure model object with given attributes.

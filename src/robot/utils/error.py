@@ -27,8 +27,8 @@ from .unic import unic
 
 EXCLUDE_ROBOT_TRACES = not os.getenv('ROBOT_INTERNAL_TRACES')
 if JYTHON:
-    from java.io import StringWriter, PrintWriter
-    from java.lang import Throwable, OutOfMemoryError
+    from java.io import StringWriter, PrintWriter # type: ignore[import]
+    from java.lang import Throwable, OutOfMemoryError # type: ignore[import]
 else:
     Throwable = ()
 

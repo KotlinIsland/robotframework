@@ -31,7 +31,7 @@ if PY3:
 else:
     invalidate_import_caches = lambda: None
 if JYTHON:
-    from java.lang.System import getProperty
+    from java.lang.System import getProperty # type: ignore[import]
 
 
 class Importer(object):

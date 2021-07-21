@@ -15,12 +15,12 @@
 
 from inspect import cleandoc
 
-from java.nio.charset import StandardCharsets
-from java.util import Locale
-from javax.lang.model.element.Modifier import PUBLIC
-from javax.lang.model.util import ElementFilter
-from javax.lang.model.type import TypeKind
-from javax.tools import DocumentationTool, ToolProvider
+from java.nio.charset import StandardCharsets # type: ignore[import]
+from java.util import Locale # type: ignore[import]
+from javax.lang.model.element.Modifier import PUBLIC # type: ignore[import]
+from javax.lang.model.util import ElementFilter # type: ignore[import]
+from javax.lang.model.type import TypeKind # type: ignore[import]
+from javax.tools import DocumentationTool, ToolProvider # type: ignore[import]
 
 from robot.running import ArgumentSpec
 from robot.utils import normalize, printable_name, split_tags_from_doc

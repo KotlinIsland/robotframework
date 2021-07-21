@@ -20,13 +20,13 @@ import sys
 try:
     from typing import Union
 except ImportError:
-    class Union(object):
+    class Union(object):  # type: ignore[no-redef]
         pass
 
 try:
     from enum import Enum
 except ImportError:    # Standard in Py 3.4+ but can be separately installed
-    class Enum(object):
+    class Enum(object):  # type: ignore[no-redef]
         pass
 
 from robot.utils import setter, py3to2, unicode, unic

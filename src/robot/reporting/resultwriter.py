@@ -12,6 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from __future__ import annotations
 
 from robot.conf import RebotSettings
 from robot.errors import DataError
@@ -40,7 +41,7 @@ class ResultWriter(object):
         writer.write_results(report='custom.html', log=None, xunit='xunit.xml')
     """
 
-    def __init__(self, *sources):
+    def __init__(self, *sources: Result | str) -> None:
         self._sources = sources
 
     def write_results(self, settings=None, **options):

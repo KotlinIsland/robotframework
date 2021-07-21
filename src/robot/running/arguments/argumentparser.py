@@ -26,8 +26,8 @@ else:
     from .py3argumentparser import PythonArgumentParser
 
 if JYTHON:
-    from java.lang import Class
-    from java.util import List, Map
+    from java.lang import Class # type: ignore[import]
+    from java.util import List, Map # type: ignore[import]
 
 
 class _ArgumentParser(object):

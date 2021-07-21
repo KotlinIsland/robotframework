@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 import os
 
 from robot.errors import DataError
@@ -46,8 +46,8 @@ class TestSuiteBuilder(object):
     :mod:`robot.api` package.
     """
 
-    def __init__(self, included_suites=None, included_extensions=('robot',),
-                 rpa=None, allow_empty_suite=False, process_curdir=True):
+    def __init__(self, included_suites: list[str] = None, included_extensions: list[str] | tuple[str, ...]=('robot',),
+                 rpa: bool=None, allow_empty_suite: bool=False, process_curdir: bool=True):
         """
         :param include_suites:
             List of suite names to include. If ``None`` or an empty list,

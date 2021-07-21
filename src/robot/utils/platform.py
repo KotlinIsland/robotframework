@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 import os
 import re
 import sys
@@ -33,7 +33,7 @@ PYPY = 'PyPy' in sys.version
 UNIXY = os.sep == '/'
 WINDOWS = not UNIXY
 
-RERAISED_EXCEPTIONS = (KeyboardInterrupt, SystemExit, MemoryError)
+RERAISED_EXCEPTIONS: tuple[type[BaseException], ...] = (KeyboardInterrupt, SystemExit, MemoryError)
 if JYTHON:
-    from java.lang import OutOfMemoryError
+    from java.lang import OutOfMemoryError # type: ignore[import]
     RERAISED_EXCEPTIONS += (OutOfMemoryError,)

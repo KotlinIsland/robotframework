@@ -31,7 +31,7 @@ from .gatherfailed import gather_failed_tests, gather_failed_suites
 
 @py3to2
 class _BaseSettings(object):
-    _cli_opts = {'RPA'              : ('rpa', None),
+    _cli_opts = {'RPA'              : ('rpa', None),  # type: ignore[var-annotated]
                  'Name'             : ('name', None),
                  'Doc'              : ('doc', None),
                  'Metadata'         : ('metadata', []),

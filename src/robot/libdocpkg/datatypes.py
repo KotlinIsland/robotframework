@@ -20,7 +20,7 @@ try:
 
     EnumType = type(Enum)
 except ImportError:  # Standard in Py 3.4+ but can be separately installed
-    class EnumType(object):
+    class EnumType(object):  # type: ignore[no-redef]
         pass
 
 

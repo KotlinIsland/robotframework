@@ -19,11 +19,11 @@ from contextlib import contextmanager
 from functools import wraps
 
 try:
-    import httplib
-    import xmlrpclib
+    import httplib # type: ignore[import]
+    import xmlrpclib# type: ignore[import]
 except ImportError:  # Py3
-    import http.client as httplib
-    import xmlrpc.client as xmlrpclib
+    import http.client as httplib  # type: ignore[no-redef]
+    import xmlrpc.client as xmlrpclib  # type: ignore[no-redef]
 import re
 import socket
 import sys
@@ -32,7 +32,7 @@ import time
 try:
     from xml.parsers.expat import ExpatError
 except ImportError:   # No expat in IronPython 2.7
-    class ExpatError(Exception):
+    class ExpatError(Exception):  # type: ignore[no-redef]
         pass
 
 from robot.errors import RemoteError
@@ -222,7 +222,7 @@ class XmlRpcRemoteClient(object):
         self.uri = uri
         self.timeout = timeout
 
-    @property
+    @property  # type: ignore[misc]
     @contextmanager
     def _server(self):
         if self.uri.startswith('https://'):
@@ -301,7 +301,7 @@ class TimeoutHTTPTransport(xmlrpclib.Transport):
 
 if IRONPYTHON:
 
-    class TimeoutHTTPTransport(xmlrpclib.Transport):
+    class TimeoutHTTPTransport(xmlrpclib.Transport):  # type: ignore[no-redef]
 
         def __init__(self, use_datetime=0, timeout=None):
             xmlrpclib.Transport.__init__(self, use_datetime)

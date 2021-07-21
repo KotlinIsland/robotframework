@@ -211,11 +211,11 @@ class TestStatus(_ExecutionStatus):
 
 
 class _Message(object):
-    setup_message = NotImplemented
-    setup_skipped_message = NotImplemented
-    teardown_skipped_message = NotImplemented
-    teardown_message = NotImplemented
-    also_teardown_message = NotImplemented
+    setup_message: str = NotImplemented
+    setup_skipped_message: str = NotImplemented
+    teardown_skipped_message: str = NotImplemented
+    teardown_message: str = NotImplemented
+    also_teardown_message: str = NotImplemented
 
     def __init__(self, status):
         self.failure = status.failure

@@ -16,11 +16,11 @@
 import textwrap
 import time
 
-from java.awt import Component
-from java.awt.event import WindowAdapter
-from javax.swing import (BoxLayout,  JLabel, JOptionPane, JPanel,
+from java.awt import Component # type: ignore[import]
+from java.awt.event import WindowAdapter # type: ignore[import]
+from javax.swing import (BoxLayout,  JLabel, JOptionPane, JPanel, # type: ignore[import]
                          JPasswordField, JTextField, JList, JScrollPane)
-from javax.swing.JOptionPane import (DEFAULT_OPTION, OK_CANCEL_OPTION,
+from javax.swing.JOptionPane import (DEFAULT_OPTION, OK_CANCEL_OPTION, # type: ignore[import]
                                      OK_OPTION, PLAIN_MESSAGE,
                                      UNINITIALIZED_VALUE, YES_NO_OPTION)
 

@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 from robot.utils import normalize_whitespace
 from robot.variables import is_assign
 
@@ -39,7 +39,7 @@ class Lexer(object):
 
 
 class StatementLexer(Lexer):
-    token_type = None
+    token_type: str | None = None
 
     def __init__(self, ctx):
         Lexer.__init__(self, ctx)

@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 import re
 
 from .itemlist import ItemList
@@ -30,7 +30,7 @@ class BodyItem(ModelObject):
     ELSE_IF = 'ELSE IF'
     ELSE = 'ELSE'
     MESSAGE = 'MESSAGE'
-    type = None
+    type: str | None = None
     __slots__ = ['parent']
 
     @property
@@ -59,7 +59,7 @@ class Body(ItemList):
 
     Body contains the keywords and other structures such as for loops.
     """
-    __slots__ = []
+    __slots__: list[str] = []
     # Set using 'Body.register' when these classes are created.
     keyword_class = None
     for_class = None
@@ -139,7 +139,7 @@ class IfBranches(Body):
     keyword_class = None
     for_class = None
     if_class = None
-    __slots__ = []
+    __slots__: list[str] = []
 
     def create_branch(self, *args, **kwargs):
         return self.append(self.if_branch_class(*args, **kwargs))

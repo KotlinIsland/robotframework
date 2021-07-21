@@ -112,10 +112,10 @@ if not JYTHON:
 
 else:
 
-    from java.io import ByteArrayOutputStream, PrintStream
-    from java.lang import System
+    from java.io import ByteArrayOutputStream, PrintStream  # type: ignore[import]
+    from java.lang import System  # type: ignore[import]
 
-    class JavaCapturer(object):
+    class JavaCapturer(object):  # type: ignore[no-redef]
 
         def __init__(self, stdout=True):
             if stdout:

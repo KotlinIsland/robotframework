@@ -67,7 +67,7 @@ def _get_python_system_encoding():
 def _get_java_system_encoding():
     # This is only used with Jython 2.7.0, others get encoding already
     # from `_get_python_system_encoding`.
-    from java.lang import System
+    from java.lang import System # type: ignore[import]
     return System.getProperty('file.encoding')
 
 

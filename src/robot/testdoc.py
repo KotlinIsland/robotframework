@@ -36,7 +36,7 @@ import time
 # Allows running as a script. __name__ check needed with multiprocessing:
 # https://github.com/robotframework/robotframework/issues/1137
 if 'robot' not in sys.modules and __name__ == '__main__':
-    import pythonpathsetter
+    import pythonpathsetter  # type: ignore[import]
 
 from robot.conf import RobotSettings
 from robot.htmldata import HtmlFileWriter, ModelWriter, JsonWriter, TESTDOC
@@ -49,7 +49,7 @@ from robot.utils import (abspath, Application, file_writer, get_link_path,
 
 # http://ironpython.codeplex.com/workitem/31549
 if IRONPYTHON and PY_VERSION < (2, 7, 2):
-    int = long
+    int = long  # type: ignore[name-defined]
 
 
 USAGE = """robot.testdoc -- Robot Framework test data documentation tool

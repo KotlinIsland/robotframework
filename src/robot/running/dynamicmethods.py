@@ -26,7 +26,7 @@ def no_dynamic_method(*args):
 
 @py3to2
 class _DynamicMethod(object):
-    _underscore_name = NotImplemented
+    _underscore_name: str = NotImplemented
 
     def __init__(self, lib):
         self.method = self._get_method(lib)

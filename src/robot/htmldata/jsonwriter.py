@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 from robot.utils import PY2
 
 
@@ -61,7 +61,7 @@ class JsonDumper(object):
 
 
 class _Dumper(object):
-    _handled_types = None
+    _handled_types: type | tuple[type, ...] | None = None
 
     def __init__(self, jsondumper):
         self._dump = jsondumper.dump
@@ -75,7 +75,7 @@ class _Dumper(object):
 
 
 class StringDumper(_Dumper):
-    _handled_types = (str, unicode) if PY2 else str
+    _handled_types = (str, unicode) if PY2 else str  # type: ignore[name-defined]
     _search_and_replace = [('\\', '\\\\'), ('"', '\\"'), ('\t', '\\t'),
                            ('\n', '\\n'), ('\r', '\\r'), ('</', '\\x3c/')]
 
@@ -91,7 +91,7 @@ class StringDumper(_Dumper):
 
 class IntegerDumper(_Dumper):
     # Handles also bool
-    _handled_types = (int, long) if PY2 else int
+    _handled_types = (int, long) if PY2 else int  # type: ignore[assignment,name-defined]
 
     def dump(self, data, mapping):
         self._write(str(data).lower())

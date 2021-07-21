@@ -12,7 +12,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+from __future__ import annotations
 import ast
 import re
 
@@ -28,11 +28,11 @@ EOL = '\n'
 
 
 class Statement(ast.AST):
-    type = None
-    handles_types = ()
+    type: str | None = None
+    handles_types: tuple[str, ...] = ()
     _fields = ('type', 'tokens')
     _attributes = ('lineno', 'col_offset', 'end_lineno', 'end_col_offset', 'errors')
-    _statement_handlers = {}
+    _statement_handlers: dict[object, object] = {}
 
     def __init__(self, tokens, errors=()):
         self.tokens = tuple(tokens)

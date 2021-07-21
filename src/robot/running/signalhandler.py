@@ -22,7 +22,7 @@ from robot.output import LOGGER
 from robot.utils import JYTHON
 
 if JYTHON:
-    from java.lang import IllegalArgumentException
+    from java.lang import IllegalArgumentException # type: ignore[import]
 else:
     IllegalArgumentException = ValueError
 
